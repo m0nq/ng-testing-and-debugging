@@ -42,6 +42,10 @@ export class XyzUserListComponent implements OnInit {
 
   onFilter(filter) {
     this.filter = filter;
+    this.xyzWebStorageService.setRemote({
+      filter: this.filter,
+      _rev: this.settings._rev || this.settings.rev
+    }).subscribe(response => this.settings = response);
     this.xyzUserListService.get().then(users => {
       this.users = this.xyzFilterByService.get({ data: users, filter: filter });
     });
@@ -50,5 +54,9 @@ export class XyzUserListComponent implements OnInit {
   onClear() {
     this.xyzUserListService.get().then(users => this.users = users);
     this.filter = '';
+    this.xyzWebStorageService.setRemote({
+      filter: '',
+      _rev: this.settings._rev || this.settings.rev
+    }).subscribe(response => this.settings = response);
   }
 }
