@@ -37,6 +37,9 @@ export class XyzUserListComponent implements OnInit {
       this.xyzUserListService.get().then(users => {
         this.users = this.xyzFilterByService.get({ data: users, filter: this.filter });
       });
+    }, error => {
+      const output = error;
+      console.error('ngOnInit error ->', output);
     });
   }
 
