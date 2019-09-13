@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { WebStorageService } from './web-storage.service';
+import { XyzWebStorageService } from './web-storage.service';
 
 describe('WebStorageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WebStorageService]
+      providers: [XyzWebStorageService]
     });
   });
 
-  it('should be created', inject([WebStorageService], (service: WebStorageService) => {
+  it('should be created', inject([XyzWebStorageService], (service: XyzWebStorageService) => {
     expect(service).toBeTruthy();
   }));
 });

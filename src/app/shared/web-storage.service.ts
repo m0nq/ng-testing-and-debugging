@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class WebStorageService {
+@Injectable()
+export class XyzWebStorageService {
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+  getRemote() {
+    return this.http.get<any>('http://localhost:5984/user/settings');
+  }
+
+  setRemote(payload: object) {
+    return this.http.put<any>('http://localhost:5984/user/settings', payload);
   }
 
   get(key: string) {
