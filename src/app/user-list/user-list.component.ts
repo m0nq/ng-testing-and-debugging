@@ -16,6 +16,12 @@ import { XyzWebStorageService } from '../shared/web-storage.service';
 export class XyzUserListComponent implements OnInit {
   filter: string;
   users: User[];
+  settings: {
+    _id: string;
+    _rev: string;
+    rev: string;
+    filter: string;
+  };
 
   constructor(
     private xyzUserListService: XyzUserListService,
@@ -25,7 +31,13 @@ export class XyzUserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.xyzUserListService.get().then(users => this.users = users);
+    this.xyzWebStorageService.getRemote().subscribe(settingsResponse => {
+      this.settings = settingsResponse;
+      this.filter = this.settings.filter;
+      this.xyzUserListService.get().then(users => {
+        this.users = this.xyzFilterByService.get({ data: users, filter: this.filter });
+      });
+    });
   }
 
   onFilter(filter) {
