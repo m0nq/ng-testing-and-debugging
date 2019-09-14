@@ -7,9 +7,10 @@ export class XyzErrorHandlerService extends ErrorHandler {
     super();
   }
 
-  handleError(error: any): void {
+  handleError(error) {
     const date = new Date();
-    console.error('An error was raised ->', {
+
+    console.error('There was an error:', {
       timestamp: date.toISOString(),
       message: error.message,
       zone: error.zone,

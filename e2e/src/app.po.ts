@@ -1,11 +1,27 @@
-import { browser, by, element } from 'protractor';
+import { browser, element, by } from 'protractor';
 
-export class AppPage {
+export class UserListAppPage {
   navigateTo() {
-    return browser.get('/');
+    return browser.get('/dashboard');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitle() {
+    const header = by.css('h2');
+    return element(header).getText();
+  }
+
+  getUnorderedList() {
+    const list = by.css('ul');
+    return element(list).isPresent();
+  }
+
+  getClearButton() {
+    const button = by.css('button');
+    return element(button);
+  }
+
+  getUsers() {
+    const item = by.css('li');
+    return element.all(item);
   }
 }
